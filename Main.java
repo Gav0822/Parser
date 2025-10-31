@@ -13,12 +13,14 @@ public class Main {
             while(error){
                 System.out.println("\nOnly .txt file will work. Do not include a file extension!\n");
                 System.out.print("Input name of file to parse (Enter \"exit\" to exit): ");
-                try{
+
+               /*************************************
+                * supposed to get filename from command line
+                * Reply: I am a little confused about this feedback. The current implementation gets 
+                *           the filename from the command line - specifically, on line 23.
+                */
+               try{
                     filename = sc.nextLine().trim();
-
-                    if(filename.toLowerCase().trim().equals("exit"))
-                        exit = true;
-
                     error = false;
 
                 } catch(Exception e){
@@ -26,6 +28,11 @@ public class Main {
                     error = true;
                 }
             }
+
+            if(filename.toLowerCase().trim().equals("exit")){
+                        exit = true;
+                        continue;
+                    }
             
             File f = new File(filename+".txt");
             if(!f.exists()){
@@ -36,7 +43,7 @@ public class Main {
             if(exit){
                 break;
             }
-            //Parser p = new Parser("tst.txt");
+
             Parser p = new Parser(filename+".txt");
             p.parse();
         }
